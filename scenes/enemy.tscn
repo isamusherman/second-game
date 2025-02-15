@@ -1,6 +1,30 @@
-[gd_scene load_steps=10 format=3 uid="uid://icgs2kqombrs"]
+[gd_scene load_steps=22 format=3 uid="uid://icgs2kqombrs"]
 
 [ext_resource type="Texture2D" uid="uid://b10g15img6cth" path="res://assets/Tiny Swords (Update 010)/Factions/Goblins/Troops/Torch/Red/Torch_Red.png" id="1_x60av"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rkm56"]
+atlas = ExtResource("1_x60av")
+region = Rect2(0, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4av40"]
+atlas = ExtResource("1_x60av")
+region = Rect2(192, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kex5f"]
+atlas = ExtResource("1_x60av")
+region = Rect2(384, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vgarq"]
+atlas = ExtResource("1_x60av")
+region = Rect2(576, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8xuhm"]
+atlas = ExtResource("1_x60av")
+region = Rect2(768, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yj8r4"]
+atlas = ExtResource("1_x60av")
+region = Rect2(960, 384, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c3t64"]
 atlas = ExtResource("1_x60av")
@@ -30,8 +54,55 @@ region = Rect2(960, 0, 192, 192)
 atlas = ExtResource("1_x60av")
 region = Rect2(1152, 0, 192, 192)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_4a2mg"]
+atlas = ExtResource("1_x60av")
+region = Rect2(0, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3klf2"]
+atlas = ExtResource("1_x60av")
+region = Rect2(192, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k18qk"]
+atlas = ExtResource("1_x60av")
+region = Rect2(384, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rkpij"]
+atlas = ExtResource("1_x60av")
+region = Rect2(576, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xka3j"]
+atlas = ExtResource("1_x60av")
+region = Rect2(768, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ipaqy"]
+atlas = ExtResource("1_x60av")
+region = Rect2(960, 192, 192, 192)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_8nf3y"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rkm56")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4av40")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kex5f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vgarq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8xuhm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yj8r4")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_c3t64")
@@ -57,6 +128,29 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4a2mg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3klf2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k18qk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rkpij")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xka3j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ipaqy")
+}],
+"loop": true,
+"name": &"run",
+"speed": 10.0
 }]
 
 [node name="Enemy" type="Node2D"]
@@ -64,6 +158,6 @@ animations = [{
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.35, 0.35)
 sprite_frames = SubResource("SpriteFrames_8nf3y")
-animation = &"idle"
+animation = &"attack"
 autoplay = "idle"
-frame_progress = 0.351506
+frame_progress = 0.0772612
