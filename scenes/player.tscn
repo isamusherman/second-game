@@ -1,10 +1,11 @@
-[gd_scene load_steps=41 format=3 uid="uid://mbwskb8pojcj"]
+[gd_scene load_steps=52 format=3 uid="uid://mbwskb8pojcj"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_51b8h"]
 [ext_resource type="Texture2D" uid="uid://b47yh4x14u3e8" path="res://assets/Colour1/Outline/120x80_PNGSheets/_Idle.png" id="1_wfxo6"]
 [ext_resource type="Texture2D" uid="uid://do3glsiu168qa" path="res://assets/Colour1/Outline/120x80_PNGSheets/_Death.png" id="2_cc571"]
 [ext_resource type="Texture2D" uid="uid://been8ae6gj3o7" path="res://assets/Colour1/Outline/120x80_PNGSheets/_Jump.png" id="3_vwjcy"]
 [ext_resource type="Texture2D" uid="uid://ccdlkh8yg0511" path="res://assets/Colour1/Outline/120x80_PNGSheets/_Run.png" id="4_iy2j2"]
+[ext_resource type="Script" path="res://scenes/character_state_machine.gd" id="6_e82qa"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4rqfk"]
 atlas = ExtResource("2_cc571")
@@ -263,10 +264,168 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_boieq"]
 radius = 6.0
 
+[sub_resource type="Animation" id="Animation_ussy7"]
+resource_name = "idle"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_wfxo6")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_ggfgm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_x76ad"]
+resource_name = "run"
+length = 0.9
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_iy2j2")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0lv4w"]
+_data = {
+"RESET": SubResource("Animation_ggfgm"),
+"idle": SubResource("Animation_ussy7"),
+"run": SubResource("Animation_x76ad")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vxftf"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_llk05"]
+animation = &"run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i058n"]
+animation = &"run"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_sh1db"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_vxftf")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_llk05")
+blend_point_1/pos = -1.0
+blend_point_2/node = SubResource("AnimationNodeAnimation_i058n")
+blend_point_2/pos = 1.0
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rd3tb"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_0ofpo"]
+states/Start/position = Vector2(213, 100)
+states/idle/node = SubResource("AnimationNodeBlendSpace1D_sh1db")
+states/idle/position = Vector2(281, -11)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_rd3tb")]
+graph_offset = Vector2(-53, -104)
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_51b8h")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(4, -41)
 sprite_frames = SubResource("SpriteFrames_4hp67")
 animation = &"death"
@@ -274,6 +433,23 @@ autoplay = "idle"
 frame = 9
 frame_progress = 1.0
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4, -40)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, -17)
 shape = SubResource("CapsuleShape2D_boieq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0lv4w")
+}
+autoplay = "idle"
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_0ofpo")
+anim_player = NodePath("../AnimationPlayer")
+parameters/idle/blend_position = 0
+
+[node name="CharacterStateMachine" type="Node" parent="."]
+script = ExtResource("6_e82qa")
