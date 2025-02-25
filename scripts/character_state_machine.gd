@@ -19,6 +19,7 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	if(current_state.next_state != null):
 		switch_states(current_state.next_state)
+	current_state.state_process(delta)
 
 func check_can_move():
 	return current_state.can_move
