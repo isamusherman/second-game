@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://mbwskb8pojcj"]
+[gd_scene load_steps=55 format=3 uid="uid://mbwskb8pojcj"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_51b8h"]
 [ext_resource type="Texture2D" uid="uid://b47yh4x14u3e8" path="res://assets/Colour1/Outline/120x80_PNGSheets/_Idle.png" id="1_wfxo6"]
@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://been8ae6gj3o7" path="res://assets/Colour1/Outline/120x80_PNGSheets/_Jump.png" id="3_vwjcy"]
 [ext_resource type="Texture2D" uid="uid://ccdlkh8yg0511" path="res://assets/Colour1/Outline/120x80_PNGSheets/_Run.png" id="4_iy2j2"]
 [ext_resource type="Script" path="res://scenes/character_state_machine.gd" id="6_e82qa"]
+[ext_resource type="Script" path="res://scenes/ground_state.gd" id="7_alb4w"]
+[ext_resource type="Script" path="res://scenes/air_state.gd" id="8_x1g21"]
+[ext_resource type="Script" path="res://scenes/landing_state.gd" id="9_tgplr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4rqfk"]
 atlas = ExtResource("2_cc571")
@@ -453,3 +456,12 @@ parameters/idle/blend_position = 0
 
 [node name="CharacterStateMachine" type="Node" parent="."]
 script = ExtResource("6_e82qa")
+
+[node name="Ground" type="Node" parent="CharacterStateMachine"]
+script = ExtResource("7_alb4w")
+
+[node name="Air" type="Node" parent="CharacterStateMachine"]
+script = ExtResource("8_x1g21")
+
+[node name="Landing" type="Node" parent="CharacterStateMachine"]
+script = ExtResource("9_tgplr")
