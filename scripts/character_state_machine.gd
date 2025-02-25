@@ -4,6 +4,8 @@ class_name CharacterStateMachine
 
 @export var current_state : State
 @export var character : CharacterBody2D
+@export var animation_tree : AnimationTree
+
 var states : Array[State]
 
 
@@ -12,6 +14,7 @@ func _ready():
 		if(child is State):
 			states.append(child)
 			child.character = character
+			child.playback = animation_tree["parameters/playback"]
 		
 		else:
 			push_warning("Child " + child.name + " is not a State for CharacterStateMachine")
@@ -21,7 +24,7 @@ func _physics_process(delta: float) -> void:
 		switch_states(current_state.next_state)
 	current_state.state_process(delta)
 
-func check_can_move():
+func check_can_move(): 
 	return current_state.can_move
 
 func switch_states(new_state: State):
